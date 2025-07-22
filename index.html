@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Muchacho Alegre Ags 2</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e0f7fa;
+      color: #004d40;
+    }
+
+    header {
+      background: #00695c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header img {
+      width: 100px;
+      height: auto;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      background: #004d40;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      overflow-x: auto;
+    }
+
+    .nav-container {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    nav a {
+      color: white;
+      background-color: #00796b;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    nav a:hover {
+      background-color: #004d40;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 10px;
+    }
+
+    .bienvenida {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    footer {
+      background: #00695c;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        gap: 8px;
+      }
+
+      nav a {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bienvenidos a El Muchacho Alegre Ags 2</h1>
+  </header>
+
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="ceviches">🥗 Ceviches</a>
+      <a href="cocteles">🍹 Cócteles</a>
+      <a href="camarones">🍤 Camarones</a>
+      <a href="filetes">🐟 Filetes</a>
+      <a href="milanesas">🥩 Milanesas</a>
+      <a href="caldos">🍲 Caldos</a>
+      <a href="especialidades">⭐ Especialidades</a>
+      <a href="tacos">🌮 Tacos</a>
+      <a href="snacks">🍼 Snacks</a>
+      <a href="hamburguesas">🍔 Hamburguesas</a>
+      <a href="fit">🥗 FIT</a>
+      <a href="litros">🥤 Litros</a>
+      <a href="bebidas">🥤 Bebidas</a>
+    </div>
+  </nav>
+
+  <img src="logo.jpg" alt="Logo El Muchacho Alegre" style="display: block; margin: 50px auto; width: 200px; height: auto;">
+
+  <main>
+    <p class="bienvenida">🌊 ¡Déjate llevar por los sabores del mar! Descubre nuestra variedad de platillos frescos, únicos y llenos de sabor. Disfruta la experiencia de "El Muchacho Alegre Ags 2". 🌴🍤</p>
+    <p>Selecciona una categoría del menú para comenzar.</p>
+  </main>
+
+  <footer style="background: #00695c; color: white; padding: 20px;">
+    <div style="
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      gap: 20px;
+      text-align: center;
+    ">
+      <!-- Mapa -->
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.1595539657883!2d-102.30019962486979!3d21.889930879983822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ef005479415b%3A0x8c28c25bb81095c7!2sEl%20Muchacho%20Alegre%202!5e0!3m2!1ses!2smx!4v1753159370034!5m2!1ses!2smx" 
+        width="300" 
+        height="200" 
+        style="border:0; border-radius: 10px;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+      <!-- Botón de WhatsApp -->
+      <a href="https://wa.me/526692471192" target="_blank" style="
+        background-color: #25D366;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+             alt="WhatsApp" 
+             style="width: 24px; height: 24px;">
+        Enviar WhatsApp
+      </a>
+
+      <!-- Texto de derechos -->
+      <p style="margin: 0;">&copy; 2025 El Muchacho Alegre Ags 2</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camarones - El Muchacho Alegre</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #e0f7fa; color: #004d40; margin: 0; padding: 0; }
+    header{ background: #00695c; color: white; text-align: center; padding: 15px; }
+    section { padding: 20px; }
+    h2 { border-bottom: 2px solid #00796b; padding-bottom: 5px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 8px 0; display: flex; justify-content: space-between; border-bottom: 1px dashed #ccc; }
+    .precio { font-weight: bold; }
+    a.volver { display: block; margin: 20px auto; width: max-content; background: #00796b; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; }
+    a.volver:hover { background: #004d40; }
+    nav {
+      background: #004d40;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background: #00796b;
+    }
+    footer {
+      background: #00695c;
+      color: white;
+      padding: 20px;
+    }
+    footer div {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      gap: 20px;
+      text-align: center;
+    }
+    footer iframe {
+      border: 0;
+      border-radius: 10px;
+    }
+    footer a.whatsapp {
+      background-color: #25D366;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    footer a.whatsapp img {
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <header><h1>🍤 Camarones</h1></header>
+  
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="ceviches">🥗 Ceviches</a>
+      <a href="cocteles">🍹 Cócteles</a>
+      <a href="camarones">🍤 Camarones</a>
+      <a href="filetes">🐟 Filetes</a>
+      <a href="milanesas">🥩 Milanesas</a>
+      <a href="caldos">🍲 Caldos</a>
+      <a href="especialidades">⭐ Especialidades</a>
+      <a href="tacos">🌮 Tacos</a>
+      <a href="snacks">🍼 Snacks</a>
+      <a href="hamburguesas">🍔 Hamburguesas</a>
+      <a href="fit">🥗 FIT</a>
+      <a href="litros">🥤 Litros</a>
+      <a href="bebidas">🥤 Bebidas</a>
+    </div>
+  </nav>
+
+  <section>
+    <ul>
+      <li><span>Empanizados</span> <span class="precio">$130</span></li>
+      <li><span>Diabla</span> <span class="precio">$130</span></li>
+      <li><span>Mojo</span> <span class="precio">$130</span></li>
+      <li><span>Mantequilla</span> <span class="precio">$130</span></li>
+      <li><span>Ajillo</span> <span class="precio">$130</span></li>
+      <li><span>Jumbo</span> <span class="precio">$160</span></li>
+      <li><span>Ajidiabla</span> <span class="precio">$140</span></li>
+      <li><span>Momia</span> <span class="precio">$150</span></li>
+      <li><span>Empanizados con papas</span> <span class="precio">$140</span></li>
+    </ul>
+    <a class="volver" href="index.html">⬅ Volver al inicio</a>
+  </section>
+  
+  <footer>
+    <div style="padding: 20px; text-align: center;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.1595539657883!2d-102.30019962486979!3d21.889930879983822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ef005479415b%3A0x8c28c25bb81095c7!2sEl%20Muchacho%20Alegre%202!5e0!3m2!1ses!2smx!4v1753159370034!5m2!1ses!2smx"
+        width="300"
+        height="200"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <div style="margin: 20px 0;">
+        <a href="https://wa.me/524491234567" target="_blank" style="
+          background-color: #25D366;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 25px;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 16px;
+          display: inline-block;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+               alt="WhatsApp"
+               style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
+          Contáctanos
+        </a>
+      </div>
+
+      <p style="color: white;">&copy; 2025 El Muchacho Alegre Ags 2</p>
+    </div>
+  </footer>
+</body>
+</html>
