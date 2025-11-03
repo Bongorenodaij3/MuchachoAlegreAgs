@@ -1,181 +1,313 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cócteles - El Muchacho Alegre</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #e0f7fa;
-      color: #004d40;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cócteles - El Muchacho Alegre</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #e0f7fa;
+    color: #004d40;
+    margin: 0;
+    padding: 0;
+  }
 
-    header {
-      background: #00695c;
-      color: white;
-      text-align: center;
-      padding: 15px;
-    }
+  header {
+    background: #00695c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+  }
 
-    nav {
-      background: #004d40;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-    nav a {
-      display: inline-block;
-      color: white;
-      text-decoration: none;
-      padding: 14px 20px;
-      font-weight: bold;
-    }
-    nav a:hover {
-      background: #00796b;
-    }
+  nav {
+    background: #004d40;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 
-    section {
-      padding: 20px;
-    }
+  .nav-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 10px;
+  }
 
-    h2 {
-      border-bottom: 2px solid #00796b;
-      padding-bottom: 5px;
-    }
+  nav a {
+    color: white;
+    background-color: #00796b;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-block;
+  }
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+  nav a:hover {
+    background-color: #004d40;
+  }
 
-    li {
-      padding: 8px 0;
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px dashed #ccc;
-    }
+  section { padding: 20px; }
+  ul { list-style: none; padding: 0; margin: 0; }
 
-    .precio {
-      font-weight: bold;
-    }
+  li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #ccc;
+    position: relative;
+  }
 
-    a.volver {
-      display: block;
-      margin: 20px auto;
-      width: max-content;
-      background: #00796b;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  a.volver {
+    display: block;
+    margin: 20px auto;
+    width: max-content;
+    background: #00796b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-    a.volver:hover {
-      background: #004d40;
-    }
+  a.volver:hover { background: #004d40; }
 
-    footer {
-      background: #00695c;
-      color: white;
-      padding: 20px;
-    }
-    footer div {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-around;
-      gap: 20px;
-      text-align: center;
-    }
-    footer iframe {
-      border: 0;
-      border-radius: 10px;
-    }
-    footer a.whatsapp {
-      background-color: #25D366;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    footer a.whatsapp img {
-      width: 24px;
-      height: 24px;
-    }
-  </style>
+  /* Expandible */
+  .expandible { cursor: pointer; transition: background 0.3s ease; }
+  .expandible:hover { background: #d9f3f0; }
+
+  .expandible .titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 0;
+  }
+
+  .expandible .titulo span.flecha {
+    font-size: 16px;
+    color: #00796b;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .expandible.abierto .titulo span.flecha {
+    transform: rotate(180deg);
+    color: #004d40;
+  }
+
+  .sabores { display: none; width: 100%; margin-top: 0; padding: 0; font-size: 16px; color: #00695c; }
+  .expandible.abierto .sabores { display: block; }
+  .sabores ul { list-style: none; padding: 0; margin: 0; }
+  .sabores li { padding: 0; border: none; }
+
+  /* Cada sabor se muestra como div flex igual que items simples */
+  .sabores li div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ccc;
+    align-items: center;
+  }
+
+  .detalle-peq { font-size: 0.8em; color: #004d40; margin-top: 3px; }
+
+  footer {
+    background: #00695c;
+    color: white;
+    padding: 20px;
+  }
+
+  footer div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    text-align: center;
+  }
+
+  footer iframe { border: 0; border-radius: 10px; }
+  footer a.whatsapp {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  footer a.whatsapp img { width: 24px; height: 24px; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>🍹 Cócteles</h1>
-  </header>
 
-  <nav id="navbar">
-    <div class="nav-container">
-      <a href="ceviches">🥗 Ceviches</a>
-      <a href="cocteles">🍹 Cócteles</a>
-      <a href="camarones">🍤 Camarones</a>
-      <a href="filetes">🐟 Filetes</a>
-      <a href="milanesas">🥩 Milanesas</a>
-      <a href="caldos">🍲 Caldos</a>
-      <a href="especialidades">⭐ Especialidades</a>
-      <a href="tacos">🌮 Tacos</a>
-      <a href="snacks">🍼 Snacks</a>
-      <a href="hamburguesas">🍔 Hamburguesas</a>
-      <a href="fit">🥗 FIT</a>
-      <a href="litros">🥤 Litros</a>
-      <a href="bebidas">🥤 Bebidas</a>
-    </div>
-  </nav>
+<header><h1>🍹 Cócteles</h1></header>
 
-  <section>
-    <ul>
-      <li><span>Copa alegre</span> <span class="precio">$90</span></li>
-      <li><span>Chavela</span> <span class="precio">$150</span></li>
-      <li><span>Peke</span> <span class="precio">$80</span></li>
-      <li><span>Mil amores</span> <span class="precio">$160</span></li>
-      <li><span>Sin Vergüenza</span> <span class="precio">$160</span></li>
-    </ul>
-    <a class="volver" href="index.html">⬅ Volver al inicio</a>
-  </section>
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="ceviches">🥗 Ceviches</a>
+    <a href="cocteles">🍹 Cócteles</a>
+    <a href="camarones">🍤 Camarones</a>
+    <a href="filetes">🐟 Filetes</a>
+    <a href="milanesas">🥩 Milanesas</a>
+    <a href="caldos">🍲 Caldos</a>
+    <a href="especialidades">⭐ Especialidades</a>
+    <a href="tacos">🌮 Tacos</a>
+    <a href="snacks">🍼 Snacks</a>
+    <a href="hamburguesas">🍔 Hamburguesas</a>
+    <a href="fit">🥗 FIT</a>
+    <a href="litros">🥤 Litros</a>
+    <a href="bebidas">🥤 Bebidas</a>
+  </div>
+</nav>
 
-  <footer>
-    <div style="padding: 20px; text-align: center;">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.1595539657883!2d-102.30019962486979!3d21.889930879983822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ef005479415b%3A0x8c28c25bb81095c7!2sEl%20Muchacho%20Alegre%202!5e0!3m2!1ses!2smx!4v1753159370034!5m2!1ses!2smx"
-        width="300"
-        height="200"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-      
-      <div style="margin: 20px 0;">
-        <a href="https://wa.me/524491234567" target="_blank" style="
-          background-color: #25D366;
-          color: white;
-          padding: 12px 20px;
-          border-radius: 25px;
-          text-decoration: none;
-          font-weight: bold;
-          font-size: 16px;
-          display: inline-block;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-               alt="WhatsApp"
-               style="width: 24px; height: 24px; vertical-align: middle; margin-right: 8px;">
-          Contáctanos
-        </a>
+<section>
+  <ul>
+    <!-- Copa Alegre -->
+    <li class="expandible" font-weight="bold">
+      <div class="titulo">
+        <span>Copa alegre</span>
+        <span class="flecha">▼</span>
       </div>
-      <p style="color: white;">&copy; 2025 El Muchacho Alegre Ags 2</p>
-    </div>
-  </footer>
+      <div class="sabores">
+        <ul>
+          <li><div><span>Camaron</span><span class="precio">$90</span></div></li>
+          <li><div><span>Pulpo</span><span class="precio">$90</span></div></li>
+          <li><div><span>Ostión</span><span class="precio">$90</span></div></li>
+          <li><div><span>Surimi</span><span class="precio">$90</span></div></li>
+          <li><div><span>Callo de Almeja</span><span class="precio">$110</span></div></li>
+          <li><div><span>Camaron + Pulpo</span><span class="precio">$90</span></div></li>
+          <li><div><span>Camaron + Surimi</span><span class="precio">$90</span></div></li>
+          <li><div><span>Camaron + Ostion</span><span class="precio">$90</span></div></li>
+          <li><div><span>Camaron + Callo</span><span class="precio">$110</span></div></li>
+          <li><div><span>Pulpo + Ostion</span><span class="precio">$110</span></div></li>
+          <li><div><span>Pulpo + Surimi</span><span class="precio">$110</span></div></li>
+          <li><div><span>Pulpo + Callo</span><span class="precio">$110</span></div></li>
+          <li><div><span>Camaron + Pulpo + Ostion</span><span class="precio">$90</span></div></li>
+          <li><div><span>Camaron + Pulpo + Surimi</span><span class="precio">$90</span></div></li>
+          <li><div><span>Camaron + Pulpo + Callo</span><span class="precio">$110</span></div></li>
+          <li><div><span>Camaron + Ostion + Surimi</span><span class="precio">$90</span></div></li>
+          <li>><span>Vuelve a la vida</span><span class="precio">$110</span>
+          <p class="detalle-peq">Todos los Mariscos</p>
+        </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Chavela -->
+    <li class="expandible" font-weight="bold">
+      <div class="titulo">
+        <span>Chavela</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="sabores">
+        <ul>
+          <li><div><span>Chabela Camaron</span><span class="precio">$150</span></div></li>
+          <li><div><span>Chabela Pulpo</span><span class="precio">$150</span></div></li>
+          <li><div><span>Chabela Ostión</span><span class="precio">$150</span></div></li>
+          <li><div><span>Chabela Surimi</span><span class="precio">$150</span></div></li>
+          <li><div><span>Chabela Callo de Almeja</span><span class="precio">$170</span></div></li>
+          <li><div><span>Camaron + Pulpo</span><span class="precio">$150</span></div></li>
+          <li><div><span>Camaron + Surimi</span><span class="precio">$150</span></div></li>
+          <li><div><span>Camaron + Ostion</span><span class="precio">$150</span></div></li>
+          <li><div><span>Camaron + Callo</span><span class="precio">$170</span></div></li>
+          <li><div><span>Pulpo + Ostion</span><span class="precio">$150</span></div></li>
+          <li><div><span>Pulpo + Surimi</span><span class="precio">$150</span></div></li>
+          <li><div><span>Pulpo + Callo</span><span class="precio">$170</span></div></li>
+          <li><div><span>Camaron + Pulpo + Ostion</span><span class="precio">$150</span></div></li>
+          <li><div><span>Camaron + Pulpo + Surimi</span><span class="precio">$150</span></div></li>
+          <li><div><span>Camaron + Pulpo + Callo</span><span class="precio">$170</span></div></li>
+          <li><div><span>Camaron + Ostion + Surimi</span><span class="precio">$150</span></div></li>
+          <li>><span>Vuelve a la vida</span><span class="precio">$170</span>
+          <p class="detalle-peq">Todos los Mariscos</p>
+        </li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Peke -->
+    <li class="expandible" font-weight="bold">
+      <div class="titulo">
+        <span>Peke</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="sabores">
+        <ul>
+          <li><div><span>Camaron</span><span class="precio">$80</span></div></li>
+          <li><div><span>Pulpo</span><span class="precio">$80</span></div></li>
+          <li><div><span>Ostión</span><span class="precio">$80</span></div></li>
+          <li><div><span>Surimi</span><span class="precio">$80</span></div></li>
+          <li><div><span>Callo de Almeja</span><span class="precio">$100</span></div></li>
+          <li><div><span>Camaron + Pulpo</span><span class="precio">$80</span></div></li>
+          <li><div><span>Camaron + Surimi</span><span class="precio">$80</span></div></li>
+          <li><div><span>Camaron + Ostion</span><span class="precio">$80</span></div></li>
+          <li><div><span>Camaron + Callo</span><span class="precio">$100</span></div></li>
+          <li><div><span>Pulpo + Ostion</span><span class="precio">$80</span></div></li>
+          <li><div><span>Pulpo + Surimi</span><span class="precio">$80</span></div></li>
+          <li><div><span>Pulpo + Callo</span><span class="precio">$100</span></div></li>
+          
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <div style="display:flex; justify-content: space-between; width:100%;">
+        <span>Mil amores</span><span class="precio">$170</span>
+      </div>
+      <p class="detalle-peq">Chavela con todo el marisco coronada con ceviche tropical.</p>
+    </li>
+
+    <li>
+      <div style="display:flex; justify-content: space-between; width:100%;">
+        <span>Sin Vergüenza</span><span class="precio">$180</span>
+      </div>
+      <p class="detalle-peq">Chavela con todo el marisco coronada con ceviche especial.</p>
+    </li>
+
+    <li>
+      <div style="display:flex; justify-content: space-between; width:100%;">
+        <span>Sabrosura Del Pacifico</span><span class="precio">$170</span>
+      </div>
+      <p class="detalle-peq">Chavela con todo el marisco coronada con ceviche de camarón.</p>
+    </li>
+  </ul>
+
+  <a class="volver" href="index.html">⬅ Volver al inicio</a>
+</section>
+
+<footer>
+  <div>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.1595539657883!2d-102.30019962486979!3d21.889930879983822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ef005479415b%3A0x8c28c25bb81095c7!2sEl%20Muchacho%20Alegre%202!5e0!3m2!1ses!2smx!4v1753159370034!5m2!1ses!2smx" 
+      width="300" height="200" allowfullscreen="" loading="lazy"></iframe>
+
+    <a href="https://wa.me/526692471192" target="_blank" class="whatsapp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      Enviar WhatsApp
+    </a>
+
+    <p style="margin:0;">&copy; 2025 El Muchacho Alegre Ags 2</p>
+  </div>
+</footer>
+
+<script>
+  const expandibles = document.querySelectorAll('.expandible');
+  expandibles.forEach(item => {
+    const titulo = item.querySelector('.titulo');
+    titulo.addEventListener('click', () => {
+      item.classList.toggle('abierto');
+    });
+  });
+</script>
+
 </body>
 </html>
