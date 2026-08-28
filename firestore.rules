@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /productos/{productoId} {
+      // Cualquiera puede LEER el menú (para que la página pública funcione)
+      allow read: if true;
+
+      // Solo un usuario autenticado (el admin que crees en Firebase Auth)
+      // puede CREAR, EDITAR o BORRAR productos
+      allow write: if request.auth != null;
+    }
+
+    // Por seguridad, todo lo demás queda bloqueado por defecto
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
