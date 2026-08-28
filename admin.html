@@ -484,31 +484,6 @@ document.getElementById("form-nuevo").addEventListener("submit", async (e) => {
     msg.className = "msg error";
   }
 });
-
-// ---------- IMPORTAR CATÁLOGO INICIAL ----------
-document.getElementById("btn-importar").addEventListener("click", async () => {
-  const msg = document.getElementById("msg-importar");
-  if (!confirm("¿Importar el catálogo inicial? Esto puede tardar un momento.")) return;
-  msg.textContent = "Importando...";
-  msg.className = "msg";
-  try {
-    const lote = db.batch();
-    SEED_PRODUCTOS.forEach(p => {
-      // ID determinístico para que re-importar no duplique, solo sobreescriba
-      const id = `${p.categoria}__${p.orden}`;
-      const ref = db.collection("productos").doc(id);
-      lote.set(ref, p);
-    });
-    await lote.commit();
-    msg.textContent = `Listo, se importaron ${SEED_PRODUCTOS.length} productos ✅`;
-    msg.className = "msg ok";
-    cargarTabla();
-  } catch (err) {
-    console.error(err);
-    msg.textContent = "Error al importar: " + err.message;
-    msg.className = "msg error";
-  }
-});
 </script>
 
 <!-- Datos originales del menú, para el botón "Importar catálogo inicial" -->
