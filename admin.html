@@ -121,7 +121,7 @@
   <!-- ---------- LOGIN ---------- -->
   <div id="login-box">
     <h2>Iniciar sesión</h2>
-    <input type="text" id="login-email" placeholder="Correo" autocomplete="username" />
+    <input type="text" id="login-email" placeholder="Usuario" autocomplete="username" />
     <input type="password" id="login-password" placeholder="Contraseña" autocomplete="current-password" />
     <button id="btn-login">Entrar</button>
     <p id="login-error"></p>
@@ -190,6 +190,16 @@
 <script>
 const auth = firebase.auth();
 
+// Firebase Auth siempre necesita un "correo" internamente, aunque tú
+// solo escribas un usuario normal. Este dominio falso es fijo y nunca
+// se usa para enviar nada; solo sirve para armar el identificador.
+const DOMINIO_INTERNO = "muchachoalegreags.com";
+
+function usuarioACorreoInterno(usuario) {
+  const limpio = usuario.trim().toLowerCase().replace(/\s+/g, "");
+  return `${limpio}@${DOMINIO_INTERNO}`;
+}
+
 const CATEGORIAS = ["ceviches","cocteles","camarones","filetes","milanesas","caldos",
   "especialidades","tacos","snacks","hamburguesas","fit","litros","bebidas"];
 
@@ -203,14 +213,18 @@ CATEGORIAS.forEach(cat => {
 
 // ---------- LOGIN ----------
 document.getElementById("btn-login").addEventListener("click", async () => {
-  const email = document.getElementById("login-email").value.trim();
+  const usuario = document.getElementById("login-email").value.trim();
   const password = document.getElementById("login-password").value;
   const errorBox = document.getElementById("login-error");
   errorBox.textContent = "";
+  if (!usuario) {
+    errorBox.textContent = "Escribe tu usuario.";
+    return;
+  }
   try {
-    await auth.signInWithEmailAndPassword(email, password);
+    await auth.signInWithEmailAndPassword(usuarioACorreoInterno(usuario), password);
   } catch (err) {
-    errorBox.textContent = "Correo o contraseña incorrectos.";
+    errorBox.textContent = "Usuario o contraseña incorrectos.";
   }
 });
 
@@ -220,7 +234,7 @@ auth.onAuthStateChanged(user => {
   if (user) {
     document.getElementById("login-box").style.display = "none";
     document.getElementById("panel").style.display = "block";
-    document.getElementById("usuario-actual").textContent = user.email;
+    document.getElementById("usuario-actual").textContent = user.email.split("@")[0];
     cargarTabla();
   } else {
     document.getElementById("login-box").style.display = "block";
